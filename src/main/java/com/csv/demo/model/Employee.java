@@ -45,7 +45,7 @@ public class Employee {
     private final Role role;
     private final double projectCompletionPercent;
 
-    // Lock to protect salary updates (concurrency control)
+
     private final Lock salaryLock = new ReentrantLock();
 
     public Employee(String name,
@@ -70,10 +70,9 @@ public class Employee {
                 double yearsBonus =Math.floor( getYearsWorked())*0.02;
 
                 double roleBonus = switch (role){
-                    case  DIRECTOR -> 0.5;
+                    case DIRECTOR -> 0.5;
                     case MANAGER -> 0.2;
-                    case  EMPLOYEE -> 0.1;
-                    default -> throw new IllegalArgumentException("Unknown role: ");
+                    case EMPLOYEE -> 0.1;
                 };
 
                 double totalBonus = yearsBonus+roleBonus;

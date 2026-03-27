@@ -2,6 +2,8 @@ package com.csv.demo.Controller;
 
 
 
+import com.csv.demo.Service.FileProcessor;
+import com.csv.demo.Service.FileProcessor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,14 +14,14 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class EmployeeController {
 
-    private Processor Processor;
-    public EmployeeController(Processor Processor){
-        this.Processor=Processor;
+    private FileProcessor fileProcessor;
+    public EmployeeController(FileProcessor fileProcessor){
+        this.fileProcessor=fileProcessor;
     }
     @PostMapping("/")
     public ResponseEntity<byte[]> getUpdatedList(MultipartFile file) throws Exception{
 
-        byte[] updatedFile = Processor.process(file);
+        byte[] updatedFile = fileProcessor.processCSV(file);
 
 
         return ResponseEntity.ok()
